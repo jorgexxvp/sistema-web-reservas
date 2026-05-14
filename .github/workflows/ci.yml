@@ -17,13 +17,12 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 22
 
-      # --- PASO NUEVO: Instalar PNPM ---
       - name: Instalar pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8 # O la versión que uses localmente
+          version: 8 
           run_install: false
 
       - name: Instalar dependencias
