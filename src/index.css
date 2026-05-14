@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+:root {
+  /* Fondos */
+  --color-bg-primary: #0b1326;
+  --color-bg-card: #131b2e;
+  --color-bg-input: #060d20;
+  --color-bg-icon: #222a3e;
+  --color-bg-surface-high: #2d3449;
+  --color-bg-surface-bright: #31394e;
+  --color-surface: #0b1326;
+  --color-surface-container-low: #131b2e;
+  --color-surface-container-lowest: #060d20;
+  --color-on-surface: #dbe2fd;
+  --color-on-surface-variant: #c2c6d6;
+  --color-primary: #adc6ff;
+  --color-on-primary: #002e6a;
+  --color-outline: #8c909f;
+
+  /* Texto */
+  --color-text-primary: #dbe2fd;
+  --color-text-secondary: #c2c6d6;
+  --color-text-muted: #8c909f;
+
+  /* Bordes */
+  --color-border-primary: #424754;
+  --color-border-soft: rgb(255 255 255 / 0.1);
+  --color-border-icon: rgb(255 255 255 / 0.05);
+
+  /* Marca */
+  --color-brand-primary: #adc6ff;
+  --color-brand-hover: #4d8eff;
+  --color-brand-dark: #002e6a;
+  --color-brand-container: #4d8eff;
+  --color-on-brand-container: #00285d;
+
+  /* Estados */
+  --color-success: #4edea3;
+  --color-warning: #ffb786;
+  --color-error: #ffb4ab;
+
+  --color-hover-row: rgba(255, 255, 255, 0.02);
+}
