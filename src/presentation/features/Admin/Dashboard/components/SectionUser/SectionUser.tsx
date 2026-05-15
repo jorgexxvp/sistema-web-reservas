@@ -41,6 +41,7 @@ export const SectionUser = () => {
   } = useUserHook();
   const { dataDocument, fetchGetDocument } = useMasterHook();
   const [openModal, setOpenModal] = useState(false);
+  const [modalTitle, setModalTitle] = useState("Crear Usuario");
   const formSearch = useForm<{ search: string }>({
     defaultValues: { search: "" },
   });
@@ -142,6 +143,7 @@ export const SectionUser = () => {
                   rolId: userDetails?.rolId,
                 });
 
+                setModalTitle("Editar Usuario");
                 setOpenModal(true);
               }}
             />
@@ -157,8 +159,7 @@ export const SectionUser = () => {
 
       {openModal && (
         <ModalBase
-          // eslint-disable-next-line react-hooks/incompatible-library
-          title={`${formUser.watch("usuarioId") ? "Editar" : "Crear"} Usuario`}
+          title={modalTitle}
           setOpen={setOpenModal}
           className="max-w-2xl"
         >
