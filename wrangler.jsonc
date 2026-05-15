@@ -1,5 +1,5 @@
 {
-	"name": "<WORKER_NAME>",
-	"compatibility_date": "<COMPATIBILITY_DATE>",
-	"pages_build_output_dir": "./dist"
-  }
+  "name": "probook-app",
+ 	"compatibility_date": "2026-01-01",
+  "pages_build_output_dir": "./dist"
+}
