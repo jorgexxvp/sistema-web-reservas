@@ -21,6 +21,7 @@ import { useForm, useWatch, type Resolver } from "react-hook-form";
 
 interface IUserFormData {
   usuarioId?: number;
+  password?: string;
   rolId: number;
   nombre: string;
   apellido: string;
@@ -35,7 +36,6 @@ export const SectionReserves = () => {
     fetchGetAllUser,
     userResponse,
     fetchCreateUser,
-    // fetchUpdateUser,
     fetchGetUser,
     rolResponse,
     response,

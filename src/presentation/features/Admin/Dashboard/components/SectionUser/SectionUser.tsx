@@ -2,6 +2,7 @@ import {
   ColumnsTable,
   CustomButton,
   InputText,
+  ModalAlert,
   ModalBase,
   SearchInput,
   StatCard,
@@ -15,12 +16,20 @@ import {
 } from "@/presentation/hooks";
 import { ResponseType, userRows, userSchema } from "@/presentation/toolbox";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Bolt, Hourglass, ShieldCheck, SquarePen, Users } from "lucide-react";
+import {
+  Bolt,
+  DeleteIcon,
+  Hourglass,
+  ShieldCheck,
+  SquarePen,
+  Users,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm, useWatch, type Resolver } from "react-hook-form";
 
 interface IUserFormData {
   usuarioId?: number;
+  password?: string;
   rolId: number;
   nombre: string;
   apellido: string;
@@ -38,10 +47,11 @@ export const SectionUser = () => {
     fetchGetUser,
     rolResponse,
     response,
+    fetchDeleteUser,
   } = useUserHook();
   const { dataDocument, fetchGetDocument } = useMasterHook();
   const [openModal, setOpenModal] = useState(false);
-  const [modalTitle, setModalTitle] = useState("Crear Usuario");
+  const [openDelete, setOpenDelete] = useState(false);
   const formSearch = useForm<{ search: string }>({
     defaultValues: { search: "" },
   });
@@ -128,24 +138,41 @@ export const SectionUser = () => {
             <ColumnsTable text={String(user.id)} />
             <ColumnsTable text={user.nombre} />
             <ColumnsTable
-              icon={<SquarePen size={18} />}
-              className="text-(--color-primary) hover:text-white"
-              onClick={async () => {
-                const userDetails = await fetchGetUser(user.id);
-                formUser.setValues({
-                  usuarioId: userDetails?.usuarioId,
-                  nombre: userDetails?.nombre,
-                  apellido: userDetails?.apellido,
-                  correo: userDetails?.correo,
-                  tipoDocumentoCodigo: userDetails?.tipoDocumentoCodigo,
-                  documento: userDetails?.documento,
-                  telefono: userDetails?.telefono,
-                  rolId: userDetails?.rolId,
-                });
+              className="text-(--color-primary"
+              children={
+                <div className="flex flex-row gap-2 justify-center items-center">
+                  <SquarePen
+                    className="hover:text-white cursor-pointer"
+                    onClick={async () => {
+                      const userDetails = await fetchGetUser(user.id);
+                      formUser.setValues({
+                        usuarioId: userDetails?.usuarioId,
+                        nombre: userDetails?.nombre,
+                        apellido: userDetails?.apellido,
+                        correo: userDetails?.correo,
+                        tipoDocumentoCodigo: userDetails?.tipoDocumentoCodigo,
+                        documento: userDetails?.documento,
+                        telefono: userDetails?.telefono,
+                        rolId: userDetails?.rolId,
+                      });
 
-                setModalTitle("Editar Usuario");
-                setOpenModal(true);
-              }}
+                      setOpenModal(!openModal);
+                    }}
+                    size={18}
+                  />
+                  <DeleteIcon
+                    className="hover:text-white cursor-pointer"
+                    onClick={async () => {
+                      const userDetails = await fetchGetUser(user.id);
+                      formUser.setValues({
+                        usuarioId: userDetails?.usuarioId,
+                      });
+
+                      setOpenDelete(!openDelete);
+                    }}
+                  />
+                </div>
+              }
             />
           </tr>
         )}
@@ -159,7 +186,7 @@ export const SectionUser = () => {
 
       {openModal && (
         <ModalBase
-          title={modalTitle}
+          title={`${formUser.watch("usuarioId") ? "Editar" : "Crear"} Usuario`}
           setOpen={setOpenModal}
           className="max-w-2xl"
         >
@@ -167,8 +194,10 @@ export const SectionUser = () => {
             className="space-y-6 flex flex-col gap-1"
             onSubmit={handleSubmit((data) => {
               fetchCreateUser(data);
+
               if (response.type === ResponseType.SUCCESS) {
                 setOpenModal(false);
+                fetchGetAllUser();
               }
             })}
           >
@@ -239,6 +268,22 @@ export const SectionUser = () => {
             </div>
           </form>
         </ModalBase>
+      )}
+
+      {openDelete && (
+        <ModalAlert
+          onClick={() => {
+            // eslint-disable-next-line react-hooks/incompatible-library
+            fetchDeleteUser(Number(formUser.watch("usuarioId")));
+            if (response.type === ResponseType.SUCCESS) {
+              setOpenDelete(false);
+              fetchGetAllUser();
+            }
+          }}
+          setOpen={setOpenDelete}
+          text="¿Desea eliminar este usuario?"
+          title="Eliminar Usuario"
+        />
       )}
     </section>
   );

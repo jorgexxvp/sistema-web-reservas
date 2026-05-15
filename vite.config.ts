@@ -17,4 +17,14 @@ export default defineConfig({
       "@core": path.resolve(__dirname, "./src/core"),
     },
   },
+  server: {
+    proxy: {
+      "/api": {
+        target:
+          "http://ec2-16-59-188-126.us-east-2.compute.amazonaws.com:9323/sanbella-web-api",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
+  },
 });

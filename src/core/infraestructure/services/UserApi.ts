@@ -30,7 +30,9 @@ export class UserApi extends PrivateApi implements UserRepository {
   };
 
   public DeleteUser = async (id: number) => {
-    const data = await this.delete<IUserResponse>(`/api/delete-user/${id}`);
+    const data = await this.delete<IUserGenericResponse>(
+      `/api/usuario/delete/${id}`,
+    );
     return data.data;
   };
 }

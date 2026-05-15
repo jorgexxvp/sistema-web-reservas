@@ -9,5 +9,5 @@ export interface UserRepository {
   GetUser: (userId: number) => Promise<IUserResponse>;
   GetListUser: (rolId: number) => Promise<IUserAllResponse>;
   CreateUser: (params: ICreateRequest) => Promise<IUserGenericResponse>;
-  DeleteUser: (id: number) => Promise<IUserResponse>;
+  DeleteUser: (id: number) => Promise<IUserGenericResponse>;
 }

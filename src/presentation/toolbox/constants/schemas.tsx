@@ -17,6 +17,7 @@ export const recoverySchema = yup.object({
 
 export const userSchema = yup.object({
   usuarioId: yup.number().optional(),
+  password: yup.string().optional(),
   rolId: yup.number().required("Obligatorio"),
   nombre: yup.string().required("Obligatorio"),
   apellido: yup.string().required("Obligatorio"),

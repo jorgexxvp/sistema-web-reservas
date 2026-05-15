@@ -87,12 +87,25 @@ export const useUserHook = () => {
     }
   };
 
+  const fetchDeleteUser = async (id: number) => {
+    setResponse({ message: "Cargando...", type: ResponseType.LOADING });
+    try {
+      const response = await clientUserApi.DeleteUser(id);
+
+      setResponse({ message: response.mensaje, type: ResponseType.SUCCESS });
+    } catch (error) {
+      const message = (error as IErrorResponse).response.data.mensaje;
+      setResponse({ message, type: ResponseType.ERROR });
+    }
+  };
+
   return {
     userResponse,
     response,
     fetchGetUser,
     fetchGetAllUser,
     fetchCreateUser,
+    fetchDeleteUser,
     rolResponse,
   };
 };

@@ -1,5 +1,5 @@
 import { type FC } from "react";
-import { SectionControl, SectionReserves, SectionUser } from "../components";
+import { SectionReserves, SectionUser } from "../components";
 import { useSidebarStore } from "@/presentation/zustand";
 import { ESidebar } from "@/presentation/toolbox";
 
@@ -12,8 +12,6 @@ export const Dashboard: FC = () => {
         return <SectionUser />;
       case ESidebar.RESERVAS:
         return <SectionReserves />;
-      case ESidebar.CONTROL:
-        return <SectionControl />;
       default:
         return <></>;
     }

@@ -1,5 +1,5 @@
 import type React from "react";
-import { Fragment, type FC } from "react";
+import { Fragment, type FC, type ReactNode } from "react";
 
 interface TableProps<T> {
   title: string[];
@@ -38,6 +38,7 @@ interface ColumnsTableProps {
   icon?: React.JSX.Element;
   onClick?: () => void;
   className?: string;
+  children?: ReactNode;
 }
 
 export const ColumnsTable: FC<ColumnsTableProps> = ({
@@ -45,6 +46,7 @@ export const ColumnsTable: FC<ColumnsTableProps> = ({
   icon,
   onClick,
   className,
+  children,
 }) => {
   return (
     <td className="px-6 py-4">
@@ -54,6 +56,7 @@ export const ColumnsTable: FC<ColumnsTableProps> = ({
       >
         {icon}
         {text}
+        {children}
       </span>
     </td>
   );
