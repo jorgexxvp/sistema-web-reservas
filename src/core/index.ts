@@ -6,12 +6,13 @@ import { MasterApi } from "./infraestructure/services/MasterApi";
 import { MasterUseCase } from "./application/MasterUseCase";
 import { ServiceApi } from "./infraestructure/services/ServiceApi";
 import { ServiceUseCase } from "./application/ServiceUseCase";
+import { API_URL } from "@/presentation/toolbox";
 
 // Repositories
-const authApi = new AuthApi({ baseURL: "/api" });
-const userApi = new UserApi({ baseURL: "/api" });
-const masterApi = new MasterApi({ baseURL: "/api" });
-const serviceApi = new ServiceApi({ baseURL: "/api" });
+const authApi = new AuthApi({ baseURL: API_URL });
+const userApi = new UserApi({ baseURL: API_URL });
+const masterApi = new MasterApi({ baseURL: API_URL });
+const serviceApi = new ServiceApi({ baseURL: API_URL });
 // Client
 
 export const clientUserApi = new UserUseCase(userApi);
