@@ -9,25 +9,6 @@ interface IUser {
   nombre: string;
 }
 
-interface IUserDetails {
-  usuarioId: number;
-  rolId: number;
-  rolNombre: string;
-  nombre: string;
-  apellido: string;
-  correo: string;
-  tipoDocumentoCodigo: string;
-  documento: string;
-  telefono: string;
-  usuario: string;
-  estadoCodigo: string;
-  totalFaltas: number;
-  habilitado: boolean;
-  fechaSuspension: string;
-  diasSuspension: number;
-  fechaNacimiento: string;
-}
-
 interface IRol {
   codigo: string;
   id: number;
@@ -43,15 +24,10 @@ interface IGenericParams {
   tipoDocumentoCodigo: string;
   documento: string;
   telefono: string;
-  usuario: string;
-  password: string;
-  estadoCodigo: string;
-  fechaNacimiento: string;
 }
 
 export const useUserHook = () => {
   const [userResponse, setUserResponse] = useState<IUser[]>([]);
-  const [userDetails, setUserDetails] = useState<IUserDetails>();
   const [rolResponse, setRolResponse] = useState<IRol[]>([]);
   const [response, setResponse] = useState<IResponse>({
     message: "",
@@ -63,9 +39,8 @@ export const useUserHook = () => {
 
     try {
       const response = await clientUserApi.GetUser(userId);
-
-      setUserDetails(response);
       setResponse({ message: "", type: ResponseType.SUCCESS });
+      return response;
     } catch (error) {
       const message =
         (error as IErrorResponse).response?.data?.mensaje ||
@@ -112,36 +87,12 @@ export const useUserHook = () => {
     }
   };
 
-  const fetchUpdateUser = async (data: IGenericParams) => {
-    setResponse({ message: "Cargando...", type: ResponseType.LOADING });
-    try {
-      const response = await clientUserApi.UpdateUser(data);
-      setResponse({ message: response.mensaje, type: ResponseType.SUCCESS });
-    } catch (error) {
-      const message = (error as IErrorResponse).response.data.mensaje;
-      setResponse({ message, type: ResponseType.ERROR });
-    }
-  };
-
-  // const fetchDeleteUser = async (id: number) => {
-  //   setResponse({ message: "Cargando...", type: ResponseType.LOADING });
-  //   try {
-  //     const response = await clientUserApi.DeleteUser(id);
-  //     setResponse({ message: response.mensaje, type: ResponseType.SUCCESS });
-  //   } catch (error) {
-  //     const message = (error as IErrorResponse).response.data.mensaje;
-  //     setResponse({ message, type: ResponseType.ERROR });
-  //   }
-  // };
-
   return {
     userResponse,
     response,
     fetchGetUser,
     fetchGetAllUser,
     fetchCreateUser,
-    fetchUpdateUser,
     rolResponse,
-    userDetails,
   };
 };

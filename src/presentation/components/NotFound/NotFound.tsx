@@ -2,9 +2,9 @@ import { ROUTE_DASHBOARD, ROUTE_LOGIN } from "@/presentation/toolbox";
 import { useLoginStore } from "@/presentation/zustand";
 
 export const NotFound = () => {
-  const { token, user } = useLoginStore();
+  const { token, name } = useLoginStore();
 
-  const redirectUrl = token && user ? "/" + ROUTE_DASHBOARD : ROUTE_LOGIN;
+  const redirectUrl = token && name ? "/" + ROUTE_DASHBOARD : ROUTE_LOGIN;
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6">

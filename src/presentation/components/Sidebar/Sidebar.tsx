@@ -3,27 +3,31 @@ import {
   LayoutDashboard,
   CalendarCheck,
   UserCog,
-  Settings,
   ChevronLeft,
   ChevronRight,
   ShieldCheck,
+  FolderArchive,
 } from "lucide-react";
+import { useSidebarStore } from "@/presentation/zustand";
 
 interface NavItemProps {
   icon: React.ElementType;
   label: string;
   active?: boolean;
   isCollapsed: boolean;
+  id: string;
+  onClick: (value: string) => void;
 }
 
 export const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const { setSelected } = useSidebarStore();
 
   const data = [
-    { icon: LayoutDashboard, label: "Dashboard" },
-    { icon: CalendarCheck, label: "Recepción" },
-    { icon: UserCog, label: "Mantenimiento de Usuario" },
-    { icon: Settings, label: "Settings" },
+    { icon: LayoutDashboard, label: "Dashboard", id: "dashboard" },
+    { icon: CalendarCheck, label: "Reservas", id: "reservas" },
+    { icon: UserCog, label: "Mantenimiento de Usuario", id: "usuarios" },
+    { icon: FolderArchive, label: "Control de agenda", id: "control" },
   ];
 
   return (
@@ -62,10 +66,12 @@ export const Sidebar = () => {
       <nav className="flex-1 space-y-1">
         {data.map((item, index) => (
           <NavItem
+            onClick={setSelected}
             key={index}
             isCollapsed={isCollapsed}
             icon={item.icon}
             label={item.label}
+            id={item.id}
             active={item.label === "User Management"}
           />
         ))}
@@ -79,10 +85,14 @@ const NavItem: React.FC<NavItemProps> = ({
   label,
   active,
   isCollapsed,
+  onClick,
+  id,
 }) => {
   return (
     <a
-      href="#"
+      onClick={() => {
+        onClick(id);
+      }}
       className={`
         flex items-center gap-3 rounded-lg py-3 transition-all group
         ${isCollapsed ? "justify-center" : "px-4"} 

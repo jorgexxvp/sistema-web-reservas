@@ -16,7 +16,7 @@ export const recoverySchema = yup.object({
 });
 
 export const userSchema = yup.object({
-  usuarioId: yup.number().optional().nullable(),
+  usuarioId: yup.number().optional(),
   rolId: yup.number().required("Obligatorio"),
   nombre: yup.string().required("Obligatorio"),
   apellido: yup.string().required("Obligatorio"),
@@ -24,8 +24,4 @@ export const userSchema = yup.object({
   tipoDocumentoCodigo: yup.string().required("Obligatorio"),
   documento: yup.string().required("Obligatorio"),
   telefono: yup.string().required("Obligatorio"),
-  usuario: yup.string().required("Obligatorio"),
-  password: yup.string().required("Obligatorio"),
-  estadoCodigo: yup.string().required("Obligatorio"),
-  fechaNacimiento: yup.string().required("Obligatorio"),
 });

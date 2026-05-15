@@ -12,3 +12,9 @@ export enum ERole {
   ROL004 = "ROL004",
   ROL005 = "ROL005",
 }
+
+export enum ESidebar {
+  RESERVAS = "reservas",
+  USUARIOS = "usuarios",
+  CONTROL = "control",
+}

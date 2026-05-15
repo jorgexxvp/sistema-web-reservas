@@ -14,10 +14,10 @@ interface SelectOption {
   value: string;
 }
 
-export const documentAdapter = (data: IDocument[]) => {
+export const documentAdapter = (data: IDocument[], code?: boolean) => {
   return data.map((item) => ({
     label: item.nombre,
-    value: item.codigo,
+    value: code ? item.codigo : String(item.id),
   }));
 };
 
@@ -33,7 +33,7 @@ export const useMasterHook = () => {
 
     try {
       const response = await clientMasterApi.GetDocument();
-      setDataDocument(documentAdapter(response.list));
+      setDataDocument(documentAdapter(response.list, true));
       setResponse({ message: "", type: ResponseType.SUCCESS });
     } catch (error) {
       const message =

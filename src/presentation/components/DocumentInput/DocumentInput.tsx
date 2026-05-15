@@ -67,12 +67,14 @@ export const Select: FC<SelectProps> = ({
 }) => {
   return (
     <div className="flex flex-col gap-2">
-      <label className="text-[16px] font-medium text-(--color-on-surface-variant) px-1">
-        {label}
-      </label>
+      {label && (
+        <label className="text-[16px] font-medium text-(--color-on-surface-variant) px-1">
+          {label}
+        </label>
+      )}
       <select
         {...hookform.register(selectName)}
-        className={`text-(--color-on-surface) focus:ring-0 cursor-pointer  ${className ? className : "border-r border-white/10 bg-transparent border-none w-32 text-[10.5px] py-1 pl-1 pr-3"}`}
+        className={`text-(--color-on-surface) focus:ring-0 cursor-pointer ${className ? className : "border-r border-white/10 bg-transparent border-none w-32 text-[10.5px] py-1 pl-1 pr-3"}`}
         style={{
           appearance: "none",
           backgroundImage:

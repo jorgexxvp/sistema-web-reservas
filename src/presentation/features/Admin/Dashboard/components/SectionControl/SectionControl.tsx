@@ -30,11 +30,12 @@ interface IUserFormData {
   telefono: string;
 }
 
-export const SectionUser = () => {
+export const SectionControl = () => {
   const {
     fetchGetAllUser,
     userResponse,
     fetchCreateUser,
+    // fetchUpdateUser,
     fetchGetUser,
     rolResponse,
     response,

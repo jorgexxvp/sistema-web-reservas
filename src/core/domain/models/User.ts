@@ -8,25 +8,7 @@ export interface ICreateRequest {
   tipoDocumentoCodigo: string;
   documento: string;
   telefono: string;
-  usuario: string;
-  password: string;
-  estadoCodigo: string;
-  fechaNacimiento: string;
-}
-
-export interface IUpdateRequest {
   usuarioId?: number;
-  rolId: number;
-  nombre: string;
-  apellido: string;
-  correo: string;
-  tipoDocumentoCodigo: string;
-  documento: string;
-  telefono: string;
-  usuario: string;
-  password: string;
-  estadoCodigo: string;
-  fechaNacimiento: string;
 }
 
 // RESPONSE

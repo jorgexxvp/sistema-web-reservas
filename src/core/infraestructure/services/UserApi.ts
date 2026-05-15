@@ -3,7 +3,6 @@ import type { UserRepository } from "@/core/domain/repositories/UserRepository";
 import { PrivateApi } from "../api/Api";
 import type {
   ICreateRequest,
-  IUpdateRequest,
   IUserAllResponse,
   IUserGenericResponse,
   IUserResponse,
@@ -18,9 +17,7 @@ export class UserApi extends PrivateApi implements UserRepository {
   };
 
   public GetUser = async (userId: number) => {
-    const data = await this.get<IUserResponse>(`/api/usuario/get`, {
-      params: { usuarioId: userId },
-    });
+    const data = await this.get<IUserResponse>(`/api/usuario/get/${userId}`);
     return data.data;
   };
 
@@ -32,13 +29,6 @@ export class UserApi extends PrivateApi implements UserRepository {
     return data.data;
   };
 
-  public UpdateUser = async (params: IUpdateRequest) => {
-    const data = await this.put<IUserGenericResponse>(
-      `/api/usuario/saveOrUpdate`,
-      params,
-    );
-    return data.data;
-  };
   public DeleteUser = async (id: number) => {
     const data = await this.delete<IUserResponse>(`/api/delete-user/${id}`);
     return data.data;
