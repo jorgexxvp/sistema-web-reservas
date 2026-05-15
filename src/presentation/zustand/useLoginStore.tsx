@@ -17,11 +17,18 @@ export interface ILoginStore {
   fetchAuth: (params: IAuthParams) => void;
   logout: () => void;
   fetchRecoveryPassword: (correo: string) => void;
+  clearAuth: () => void;
 }
 
 export const useLoginStore = create<ILoginStore>()(
   persist(
     (set) => ({
+      clearAuth: () =>
+        set({
+          rol: null,
+          name: "",
+          token: "",
+        }),
       token: null,
       rol: null,
       name: null,
@@ -105,6 +112,7 @@ export const useLoginStore = create<ILoginStore>()(
         }
       },
     }),
+
     {
       name: "auth-storage",
       partialize: (state) => ({

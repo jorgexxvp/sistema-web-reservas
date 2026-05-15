@@ -8,3 +8,4 @@ export * from "./Header";
 export * from "./Table";
 export * from "./StatCard";
 export * from "./SearchInput";
+export * from "./TimeSlotSlider";

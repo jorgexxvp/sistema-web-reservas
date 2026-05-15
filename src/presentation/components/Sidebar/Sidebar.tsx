@@ -6,7 +6,6 @@ import {
   ChevronLeft,
   ChevronRight,
   ShieldCheck,
-  FolderArchive,
 } from "lucide-react";
 import { useSidebarStore } from "@/presentation/zustand";
 
@@ -27,7 +26,6 @@ export const Sidebar = () => {
     { icon: LayoutDashboard, label: "Dashboard", id: "dashboard" },
     { icon: CalendarCheck, label: "Reservas", id: "reservas" },
     { icon: UserCog, label: "Mantenimiento de Usuario", id: "usuarios" },
-    { icon: FolderArchive, label: "Control de agenda", id: "control" },
   ];
 
   return (

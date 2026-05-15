@@ -54,6 +54,7 @@ interface SelectProps {
   options: { label: string; value: string }[];
   className?: string;
   error?: string;
+  selectTitle?: string;
   label?: string;
 }
 
