@@ -30,6 +30,7 @@ Aplicación web moderna para gestión de reservas, reserva de servicios y admini
 | **pnpm** | 8+ | Package Manager |
 
 ## 📁 Estructura del Proyecto
+```
 src/
 ├── core/                          # Lógica de negocio central
 │   ├── application/               # Use Cases y servicios
@@ -104,3 +105,4 @@ src/
 ├── vite.config.ts                 # Configuración de Vite
 ├── tailwind.config.ts             # Configuración de Tailwind
 └── tsconfig.json                  # Configuración de TypeScript
+```
