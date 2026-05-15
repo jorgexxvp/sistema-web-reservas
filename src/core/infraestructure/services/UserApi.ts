@@ -3,14 +3,15 @@ import type { UserRepository } from "@/core/domain/repositories/UserRepository";
 import { PrivateApi } from "../api/Api";
 import type {
   ICreateRequest,
-  IRoleResponse,
   IUpdateRequest,
+  IUserAllResponse,
+  IUserGenericResponse,
   IUserResponse,
 } from "@/core/domain/models/User";
 
 export class UserApi extends PrivateApi implements UserRepository {
   public GetListUser = async (rolId: number) => {
-    const data = await this.get<IUserResponse>(`/api/usuario/load`, {
+    const data = await this.get<IUserAllResponse>(`/api/usuario/load`, {
       params: { rolId },
     });
     return data.data;
@@ -23,19 +24,17 @@ export class UserApi extends PrivateApi implements UserRepository {
     return data.data;
   };
 
-  public GetRol = async () => {
-    const data = await this.get<IRoleResponse>("/api/usuario/init");
-    return data.data;
-  };
-
   public CreateUser = async (params: ICreateRequest) => {
-    const data = await this.post<IUserResponse>("/api/create-user", params);
+    const data = await this.post<IUserGenericResponse>(
+      "/api/usuario/saveOrUpdate",
+      params,
+    );
     return data.data;
   };
 
   public UpdateUser = async (params: IUpdateRequest) => {
-    const data = await this.put<IUserResponse>(
-      `/api/update-user/${params.id}`,
+    const data = await this.put<IUserGenericResponse>(
+      `/api/usuario/saveOrUpdate`,
       params,
     );
     return data.data;

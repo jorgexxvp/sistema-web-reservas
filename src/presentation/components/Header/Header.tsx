@@ -1,6 +1,6 @@
 import { ERole } from "@/presentation/toolbox";
 import { useLoginStore } from "@/presentation/zustand";
-import { CircleUser, Search } from "lucide-react";
+import { CircleUser } from "lucide-react";
 
 export const Header = () => {
   const { rol, name } = useLoginStore();
@@ -11,18 +11,6 @@ export const Header = () => {
         <h1 className="text-2xl font-bold tracking-tight text-brand-primary">
           Store
         </h1>
-
-        <div className="relative hidden w-full max-w-md lg:block">
-          <Search
-            size={20}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted"
-          />
-          <input
-            type="text"
-            placeholder="Search..."
-            className="w-full rounded-full border border-border-primary bg-bg-input py-2 pl-10 pr-4 text-sm text-text-primary focus:outline-none focus:ring-1 focus:ring-brand-primary/50"
-          />
-        </div>
       </div>
 
       <div className="flex items-center gap-3">

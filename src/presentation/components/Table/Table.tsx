@@ -16,7 +16,7 @@ export const Table = <T,>({ title, data, render }: TableProps<T>) => {
             {title.map((t, index) => (
               <th
                 key={index}
-                className="px-6 py-4 text-xs font-bold uppercase text-(--color-text-muted)"
+                className="px-6 py-4 text-xs font-bold uppercase text-(--color-text-muted) last:w-7.5 last:justify-center"
               >
                 {t}
               </th>
@@ -37,17 +37,19 @@ interface ColumnsTableProps {
   text?: string;
   icon?: React.JSX.Element;
   onClick?: () => void;
+  className?: string;
 }
 
 export const ColumnsTable: FC<ColumnsTableProps> = ({
   text,
   icon,
   onClick,
+  className,
 }) => {
   return (
     <td className="px-6 py-4">
       <span
-        className={`flex items-center gap-2 text-sm ${onClick ? "cursor-pointer hover:text-white" : ""}`}
+        className={`flex items-center gap-2 text-sm ${onClick ? "cursor-pointer hover:text-white" : ""} ${className || ""}`}
         onClick={onClick}
       >
         {icon}

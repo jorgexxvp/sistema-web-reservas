@@ -6,9 +6,9 @@ export enum ResponseType {
 }
 
 export enum ERole {
-  ROL001 = "Administrador",
-  ROL002 = "Recepcionista",
-  ROL003 = "Especialista",
-  ROL004 = "Cliente",
-  ROL005 = "Invitado",
+  ROL001 = "ROL001",
+  ROL002 = "ROL002",
+  ROL003 = "ROL003",
+  ROL004 = "ROL004",
+  ROL005 = "ROL005",
 }

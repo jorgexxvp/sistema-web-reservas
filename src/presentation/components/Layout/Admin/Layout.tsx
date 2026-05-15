@@ -1,5 +1,6 @@
 import type { FC, ReactNode } from "react";
 import { Sidebar } from "../../Sidebar";
+import { Header } from "../../Header";
 
 interface LayoutProps {
   children: ReactNode;
@@ -21,7 +22,10 @@ export const LayoutAdmin: FC<LayoutProps> = ({ children, className }) => {
     >
       <Sidebar />
 
-      <main className="flex-1 overflow-y-auto">{children}</main>
+      <main className="flex-1 overflow-y-auto">
+        <Header />
+        {children}
+      </main>
     </div>
   );
 };

@@ -9,10 +9,10 @@ export class UserUseCase {
   }
 
   public async GetListUser(rolId: number) {
-    return this.repo.GetUser(rolId);
+    return this.repo.GetListUser(rolId);
   }
   public async GetUser(userId: number) {
-    return this.repo.GetUser(rolId);
+    return this.repo.GetUser(userId);
   }
   public async CreateUser(params: ICreateRequest) {
     return this.repo.CreateUser(params);
@@ -22,8 +22,5 @@ export class UserUseCase {
   }
   public async DeleteUser(id: number) {
     return this.repo.DeleteUser(id);
-  }
-  public async GetRol() {
-    return this.repo.GetRol();
   }
 }

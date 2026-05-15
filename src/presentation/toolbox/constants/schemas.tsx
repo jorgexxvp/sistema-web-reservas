@@ -14,3 +14,18 @@ export const recoverySchema = yup.object({
     .email("Correo electrónico inválido")
     .required("El correo electrónico es requerido"),
 });
+
+export const userSchema = yup.object({
+  usuarioId: yup.number().optional().nullable(),
+  rolId: yup.number().required("Obligatorio"),
+  nombre: yup.string().required("Obligatorio"),
+  apellido: yup.string().required("Obligatorio"),
+  correo: yup.string().email().required("Obligatorio"),
+  tipoDocumentoCodigo: yup.string().required("Obligatorio"),
+  documento: yup.string().required("Obligatorio"),
+  telefono: yup.string().required("Obligatorio"),
+  usuario: yup.string().required("Obligatorio"),
+  password: yup.string().required("Obligatorio"),
+  estadoCodigo: yup.string().required("Obligatorio"),
+  fechaNacimiento: yup.string().required("Obligatorio"),
+});

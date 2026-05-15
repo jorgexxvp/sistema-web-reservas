@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { clientUserApi } from "@/core";
+import { clientMasterApi, clientUserApi } from "@/core";
 import type { IErrorResponse, IResponse } from "../toolbox";
 import { ResponseType } from "../toolbox";
 
@@ -9,46 +9,81 @@ interface IUser {
   nombre: string;
 }
 
+interface IUserDetails {
+  usuarioId: number;
+  rolId: number;
+  rolNombre: string;
+  nombre: string;
+  apellido: string;
+  correo: string;
+  tipoDocumentoCodigo: string;
+  documento: string;
+  telefono: string;
+  usuario: string;
+  estadoCodigo: string;
+  totalFaltas: number;
+  habilitado: boolean;
+  fechaSuspension: string;
+  diasSuspension: number;
+  fechaNacimiento: string;
+}
+
 interface IRol {
   codigo: string;
   id: number;
   nombre: string;
 }
 
-interface ICreateParams {
-  account: number;
-  name: string;
-  description: string;
-  email: string;
-  phone: string;
-}
-
-interface IUpdateParams {
-  id: number;
-  name: string;
-  description: string;
-  email: string;
-  phone: string;
+interface IGenericParams {
+  usuarioId?: number;
+  rolId: number;
+  nombre: string;
+  apellido: string;
+  correo: string;
+  tipoDocumentoCodigo: string;
+  documento: string;
+  telefono: string;
+  usuario: string;
+  password: string;
+  estadoCodigo: string;
+  fechaNacimiento: string;
 }
 
 export const useUserHook = () => {
   const [userResponse, setUserResponse] = useState<IUser[]>([]);
+  const [userDetails, setUserDetails] = useState<IUserDetails>();
   const [rolResponse, setRolResponse] = useState<IRol[]>([]);
   const [response, setResponse] = useState<IResponse>({
     message: "",
     type: ResponseType.INITIAL,
   });
 
-  const fetchGetUser = useCallback(async () => {
+  const fetchGetUser = useCallback(async (userId: number) => {
     setResponse({ message: "Cargando datos...", type: ResponseType.LOADING });
 
     try {
-      const resRoles = await clientUserApi.GetRol();
+      const response = await clientUserApi.GetUser(userId);
+
+      setUserDetails(response);
+      setResponse({ message: "", type: ResponseType.SUCCESS });
+    } catch (error) {
+      const message =
+        (error as IErrorResponse).response?.data?.mensaje ||
+        "Error desconocido";
+      setResponse({ message, type: ResponseType.ERROR });
+    }
+  }, []);
+
+  const fetchGetAllUser = useCallback(async () => {
+    setResponse({ message: "Cargando datos...", type: ResponseType.LOADING });
+
+    try {
+      const resRoles = await clientMasterApi.GetRol();
       const roles = resRoles.list;
       setRolResponse(roles);
 
       const userPromises = roles.map((rol: IRol) =>
-        clientUserApi.GetUser(rol.id),
+        clientUserApi.GetListUser(rol.id),
       );
 
       const results = await Promise.all(userPromises);
@@ -65,59 +100,48 @@ export const useUserHook = () => {
     }
   }, []);
 
-  const fetchCreateUser = async (data: ICreateParams) => {
+  const fetchCreateUser = async (data: IGenericParams) => {
     setResponse({ message: "Cargando...", type: ResponseType.LOADING });
     try {
-      const res = await clientUserApi.CreateUser({
-        name: data.name,
-        description: data.description,
-        email: data.email,
-        phone: data.phone,
-        accountId: data.account,
-      });
+      const response = await clientUserApi.CreateUser(data);
 
-      setResponse({ message: "", type: ResponseType.SUCCESS });
+      setResponse({ message: response.mensaje, type: ResponseType.SUCCESS });
     } catch (error) {
       const message = (error as IErrorResponse).response.data.mensaje;
       setResponse({ message, type: ResponseType.ERROR });
     }
   };
 
-  const fetchDeleteUser = async (id: number) => {
+  const fetchUpdateUser = async (data: IGenericParams) => {
     setResponse({ message: "Cargando...", type: ResponseType.LOADING });
     try {
-      const res = await clientUserApi.DeleteUser(id);
-      setResponse({ message: "", type: ResponseType.SUCCESS });
+      const response = await clientUserApi.UpdateUser(data);
+      setResponse({ message: response.mensaje, type: ResponseType.SUCCESS });
     } catch (error) {
       const message = (error as IErrorResponse).response.data.mensaje;
       setResponse({ message, type: ResponseType.ERROR });
     }
   };
 
-  const fetchUpdateUser = async (data: IUpdateParams) => {
-    setResponse({ message: "Cargando...", type: ResponseType.LOADING });
-    try {
-      const res = await clientUserApi.UpdateUser({
-        name: data.name,
-        description: data.description,
-        email: data.email,
-        phone: data.phone,
-        id: data.id,
-      });
-      setResponse({ message: "", type: ResponseType.SUCCESS });
-    } catch (error) {
-      const message = (error as IErrorResponse).response.data.mensaje;
-      setResponse({ message, type: ResponseType.ERROR });
-    }
-  };
+  // const fetchDeleteUser = async (id: number) => {
+  //   setResponse({ message: "Cargando...", type: ResponseType.LOADING });
+  //   try {
+  //     const response = await clientUserApi.DeleteUser(id);
+  //     setResponse({ message: response.mensaje, type: ResponseType.SUCCESS });
+  //   } catch (error) {
+  //     const message = (error as IErrorResponse).response.data.mensaje;
+  //     setResponse({ message, type: ResponseType.ERROR });
+  //   }
+  // };
 
   return {
     userResponse,
     response,
     fetchGetUser,
+    fetchGetAllUser,
     fetchCreateUser,
     fetchUpdateUser,
-    fetchDeleteUser,
     rolResponse,
+    userDetails,
   };
 };
