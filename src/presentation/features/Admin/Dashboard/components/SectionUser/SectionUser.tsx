@@ -189,6 +189,7 @@ export const SectionUser = () => {
               <InputText
                 methods={formUser}
                 name="correo"
+                type="correo"
                 label="Correo Electrónico"
                 placeholder="name@company.com"
                 error={errors.correo?.message}
