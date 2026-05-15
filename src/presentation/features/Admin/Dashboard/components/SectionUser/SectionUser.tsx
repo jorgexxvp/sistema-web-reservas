@@ -18,10 +18,10 @@ import { ResponseType, userRows, userSchema } from "@/presentation/toolbox";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Bolt,
-  DeleteIcon,
   Hourglass,
   ShieldCheck,
   SquarePen,
+  Trash,
   Users,
 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -160,7 +160,7 @@ export const SectionUser = () => {
                     }}
                     size={18}
                   />
-                  <DeleteIcon
+                  <Trash
                     className="hover:text-white cursor-pointer"
                     onClick={async () => {
                       const userDetails = await fetchGetUser(user.id);

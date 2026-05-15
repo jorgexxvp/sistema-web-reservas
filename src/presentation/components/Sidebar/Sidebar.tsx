@@ -8,6 +8,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { useSidebarStore } from "@/presentation/zustand";
+import { ERole } from "@/presentation/toolbox";
 
 interface NavItemProps {
   icon: React.ElementType;
@@ -24,8 +25,17 @@ export const Sidebar = () => {
 
   const data = [
     { icon: LayoutDashboard, label: "Dashboard", id: "dashboard" },
-    { icon: CalendarCheck, label: "Reservas", id: "reservas" },
-    { icon: UserCog, label: "Mantenimiento de Usuario", id: "usuarios" },
+    {
+      icon: CalendarCheck,
+      label: "Reservas",
+      id: "reservas",
+    },
+    {
+      icon: UserCog,
+      label: "Mantenimiento de Usuario",
+      id: "usuarios",
+      rol: ERole.ROL001,
+    },
   ];
 
   return (
