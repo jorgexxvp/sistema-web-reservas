@@ -1,4 +1,4 @@
-# Sanbella Web - Sistema de Reservas 🎫
+# Sistema de Reservas Web Reservas 🎫
 
 Aplicación web moderna para gestión de reservas, reserva de servicios y administración de usuarios. Construida con **React**, **TypeScript**, **Tailwind CSS** y **Vite**, siguiendo los principios de **Clean Architecture**.
 
@@ -14,7 +14,7 @@ Aplicación web moderna para gestión de reservas, reserva de servicios y admini
 
 ## 📋 Requisitos Previos
 
-- **Node.js** 18+ 
+- **Node.js** 20+ 
 - **pnpm** 8+ ([Instalar pnpm](https://pnpm.io/installation))
 - **Git**
 
@@ -30,6 +30,77 @@ Aplicación web moderna para gestión de reservas, reserva de servicios y admini
 | **pnpm** | 8+ | Package Manager |
 
 ## 📁 Estructura del Proyecto
-src/ ├── core/ # Lógica de negocio central │ └── application/ # Use Cases y servicios │ ├── AuthUseCase.ts │ ├── MasterUseCase.ts │ ├── ServiceUseCase.ts │ └── UserUseCase.ts │ ├── domain/ # Entidades y interfaces │ ├── models/ # Modelos de datos │ │ ├── Auth.ts │ │ ├── Master.ts │ │ ├── Service.ts │ │ └── User.ts │ └── repositories/ # Interfaces de repositorios │ ├── AuthRepository.ts │ ├── MasterRepository.ts │ ├── ServiceRepository.ts │ └── UserRepository.ts │ ├── infrastructure/ # Implementaciones de APIs │ ├── api/ │ │ └── Api.ts # Configuración HTTP cliente │ └── services/ # Servicios de API │ ├── AuthApi.ts │ ├── MasterApi.ts │ ├── ServiceApi.ts │ └── UserApi.ts │ └── presentation/ # Capa de presentación (UI) ├── assets/ │ ├── image/ │ └── svg/ ├── components/ # Componentes reutilizables │ ├── CustomButton/ │ ├── Header/ │ ├── InputText/ │ ├── Layout/ │ ├── Modal/ │ ├── Sidebar/ │ ├── SkeletonTable/ │ ├── StatCard/ │ ├── Table/ │ └── TimeSlotSlider/ ├── features/ # Módulos por feature │ └── Admin/ │ ├── Dashboard/ # Secciones de la feature │ │ ├── components/ │ │ ├── pages/ │ │ └── index.ts │ ├── pages/ │ └── index.ts ├── hooks/ # Custom React Hooks │ ├── useMasterHook.tsx │ ├── useServiceHook.tsx │ └── useUserHook.tsx ├── zustand/ # Global State Management │ ├── useLoginStore.tsx │ ├── useMasterStore.tsx │ └── useSidebarStore.tsx ├── toolbox/ # Utilidades y constantes │ ├── constants/ │ │ ├── data.ts │ │ ├── environment.ts │ │ ├── responseType.ts │ │ ├── routes.ts │ │ ├── schemas.tsx │ │ └── theme.ts │ ├── interface/ │ ├── utils/ │ └── index.ts ├── routes/ # Configuración de rutas └── App.tsx
-
-index.ts # Entry point vite.config.ts # Configuración de Vite tailwind.config.ts # Configuración de Tailwind tsconfig.json # Configuración de TypeScript
+src/
+├── core/                          # Lógica de negocio central
+│   ├── application/               # Use Cases y servicios
+│   │   ├── AuthUseCase.ts
+│   │   ├── MasterUseCase.ts
+│   │   ├── ServiceUseCase.ts
+│   │   └── UserUseCase.ts
+│   ├── domain/                    # Entidades e interfaces
+│   │   ├── models/                # Modelos de datos
+│   │   │   ├── Auth.ts
+│   │   │   ├── Master.ts
+│   │   │   ├── Service.ts
+│   │   │   └── User.ts
+│   │   └── repositories/          # Interfaces de repositorios
+│   │       ├── AuthRepository.ts
+│   │       ├── MasterRepository.ts
+│   │       ├── ServiceRepository.ts
+│   │       └── UserRepository.ts
+│   └── infrastructure/            # Implementaciones de APIs
+│       ├── api/
+│       │   └── Api.ts             # Configuración HTTP cliente
+│       └── services/              # Servicios de API
+│           ├── AuthApi.ts
+│           ├── MasterApi.ts
+│           ├── ServiceApi.ts
+│           └── UserApi.ts
+├── presentation/                  # Capa de presentación (UI)
+│   ├── assets/
+│   │   ├── images/
+│   │   └── svg/
+│   ├── components/                # Componentes reutilizables
+│   │   ├── CustomButton/
+│   │   ├── Header/
+│   │   ├── InputText/
+│   │   ├── Layout/
+│   │   ├── Modal/
+│   │   ├── Sidebar/
+│   │   ├── SkeletonTable/
+│   │   ├── StatCard/
+│   │   ├── Table/
+│   │   └── TimeSlotSlider/
+│   ├── features/                  # Módulos por feature
+│   │   └── Admin/
+│   │       ├── Dashboard/         # Secciones de la feature
+│   │       │   ├── components/
+│   │       │   ├── pages/
+│   │       │   └── index.ts
+│   │       ├── pages/
+│   │       └── index.ts
+│   ├── hooks/                     # Custom React Hooks
+│   │   ├── useMasterHook.tsx
+│   │   ├── useServiceHook.tsx
+│   │   └── useUserHook.tsx
+│   ├── zustand/                   # Global State Management
+│   │   ├── useLoginStore.tsx
+│   │   ├── useMasterStore.tsx
+│   │   └── useSidebarStore.tsx
+│   ├── toolbox/                   # Utilidades y constantes
+│   │   ├── constants/
+│   │   │   ├── data.ts
+│   │   │   ├── environment.ts
+│   │   │   ├── responseType.ts
+│   │   │   ├── routes.ts
+│   │   │   ├── schemas.tsx
+│   │   │   └── theme.ts
+│   │   ├── interface/
+│   │   ├── utils/
+│   │   └── index.ts
+│   ├── routes/                    # Configuración de rutas
+│   └── App.tsx
+├── index.ts                       # Entry point
+├── vite.config.ts                 # Configuración de Vite
+├── tailwind.config.ts             # Configuración de Tailwind
+└── tsconfig.json                  # Configuración de TypeScript
